@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aarav's 2nd Birthday Invitation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+
+        @media print {
+            .confetti {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            .details-container::after {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            /* Ensure background colors print */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+        
+        
+        /* You can add your Mickey font here:
+        
+        */
+        @font-face {
+            font-family: 'MickeyFont';
+            src: url('./mickey/minnie.ttf') format('truetype');
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Bubblegum Sans', cursive;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .invitation-card {
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            padding: 30px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .confetti {
+            position: absolute;
+            border-radius: 50%;
+            box-shadow: 0 0 2px rgba(0,0,0,0.2);
+        }
+        
+        .border-confetti {
+            position: absolute;
+            width: calc(100% - 60px);
+            height: calc(100% - 60px);
+            top: 30px;
+            left: 30px;
+            z-index: 0;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .oh {
+            color: #FFD900;
+            font-size: 80px;
+            font-weight: 800;
+            margin: -10px 0 -10px 0;  /* Negative margin to bring it closer to TWO */
+            display: block;
+            transform: rotate(-5deg);
+            font-family: 'MickeyFont', cursive;
+            position: relative;
+            left: -100px;  /* Move OH to the left */
+            z-index: 1;
+        }
+        
+        .twodles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            position: relative;
+        }
+        
+        .two {
+            color: #FF0000;
+            font-size: 80px;
+            font-weight: 800;
+            margin: 0;
+            display: inline-block;
+            transform: rotate(-5deg);
+            font-family: 'MickeyFont', cursive; 
+        }
+        
+        .dles {
+            color: #000000;
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+            display: inline-block;
+            font-family: 'MickeyFont', cursive; 
+        }
+        
+        .invitation-text {
+            font-size: 22px;
+            margin: 20px 0;
+        }
+        
+        .birthday-person {
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .name {
+            color: #FF0000;
+            font-weight: 800;
+            font-size: 46px;  /* increased from 26px */
+            display: block;
+            font-family: 'MickeyFont', cursive;
+            margin-bottom: 5px;
+        }
+        
+        .birthday-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .number {
+            color: #FFD900;
+            font-weight: 800;
+            font-size: 26px;
+            font-family: 'MickeyFont', cursive;
+        }
+        
+        .birthday {
+            color: #FF0000;
+            font-weight: 800;
+            font-size: 26px;
+            font-family: 'MickeyFont', cursive;
+        }
+        
+        .details-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin: 30px 0;
+            border-top: 6px dotted #000;
+            border-bottom: 6px dotted #000;
+            padding: 25px 0;
+        }
+        
+        .detail-box {
+            padding: 10px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 200px;
+        }
+        
+        .date {
+            font-size: 24px;
+            margin: 0;
+            font-weight: bold;
+        }
+        
+        .date-number {
+            color: #FF0000;
+            font-size: 46px;
+            font-weight: 800;
+            margin: 5px 0 10px 0;
+            font-family: 'MickeyFont', cursive;
+        }
+        
+        .time {
+            color: #FFD900;
+            font-size: 42px;
+            font-weight: 800;
+            margin: 5px 0;
+            font-family: 'MickeyFont', cursive;
+            line-height: 1.1;
+        }
+        
+        .time-details {
+            color: #FFD900;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 5px 0;
+            font-family: 'MickeyFont', cursive;
+            line-height: 1.3;
+        }
+        
+        .location-title {
+            font-size: 24px;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+        
+        .location-address {
+            color: #FF0000;
+            font-size: 20px;
+            font-weight: 800;
+            margin: 5px 0 15px 0;
+            line-height: 1.4;
+        }
+        
+        .rsvp {
+            font-size: 20px;
+            margin: 10px 0 5px 0;
+            font-weight: bold;
+        }
+        
+        .phone {
+            color: #FFD900;
+            font-size: 22px;
+            font-weight: 800;
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .footer-text-1 {
+            font-size: 18px;
+            font-weight: 800;
+            margin: 5px 0;
+        }
+        
+        .footer-text-2 {
+            color: #FF0000;
+            font-size: 22px;
+            font-weight: 800;
+            margin: 5px 0;
+            font-family: 'MickeyFont', cursive;
+        }
+        
+        .footer-text-3 {
+            color: #FFD900;
+            font-size: 38px;
+            font-weight: 800;
+            margin: 5px 0;
+            font-family: 'MickeyFont', cursive;
+        }
+        
+        .mickey-container {
+            position: absolute;
+            bottom: -150px;
+            right: -110px;
+            width: 230px;  /* increased size */
+            height: 240px; /* increased size */
+            z-index: 2;
+            transform: rotate(-30deg); /* added rotation */
+        }
+        
+        .mickey-head {
+            position: relative;
+            width: 130px;  /* increased size */
+            height: 130px; /* increased size */
+            background-color: #000000;
+            border-radius: 50%;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        
+        .mickey-ear {
+            position: absolute;
+            width: 65px;   /* increased size */
+            height: 65px;  /* increased size */
+            background-color: #000000;
+            border-radius: 50%;
+            top: 0;
+        }
+        
+        .mickey-ear-left {
+            left: 10px;  /* adjusted position */
+        }
+        
+        .mickey-ear-right {
+            right: 10px; /* adjusted position */
+        }
+        
+        .mickey-number {
+            position: absolute;
+            color: #FF0000;
+            font-size: 80px;  /* increased size */
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'MickeyFont', cursive;
+        }
+        
+        /* Vertical divider */
+        .details-container {
+            position: relative;
+        }
+        
+        .details-container::after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            bottom: 15px;
+            left: 50%;
+            width: 6px;
+            transform: translateX(-50%);
+            background: radial-gradient(circle at center, #000 3px, transparent 3px);
+            background-size: 6px 12px;
+            background-repeat: repeat-y;
+        }
+    </style>
+</head>
+<body>
+    <div class="invitation-card">
+        <div class="confetti-container" id="confetti-container"></div>
+        <div class="content">
+            <div class="header">
+                <h1 class="oh">OH</h1>
+                <div class="twodles">
+                    <h1 class="two">TWO</h1>
+                    <h1 class="dles">DLES!</h1>
+                </div>
+            </div>
+            
+            <p class="invitation-text">PLEASE JOIN US IN CELEBRATING</p>
+            
+            <div class="birthday-person">
+                <span class="name">AARAV'S</span>
+                <div class="birthday-line">
+                    <span class="number">2ND </span>
+                    <span class="birthday">BIRTHDAY</span>
+                </div>
+            </div>
+            
+            <div class="details-container">
+                <div class="detail-box">
+                    <p class="date">SATURDAY, MARCH</p>
+                    <p class="date-number">15</p>
+                    <p class="time">5:30 PM</p>
+                    <p class="time-details">Cake cutting and<br/>Dinner 6:15 PM onwards</p>
+                </div>
+                
+                <div class="detail-box">
+                    <p class="location-title">KEEPERS COVE</p>
+                    <p class="location-address">59 Jln Pemimpin L&Y Building,<br>#04-04A, Singapore 577218</p>
+                    <p class="rsvp">RSVP</p>
+                    <p class="phone">+65 9123 4567</p> 
+                    <p></p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p class="footer-text-1">PUT ON YOUR EARS,</p>
+                <p class="footer-text-2">IT'S TIME FOR</p>
+                <p class="footer-text-3">CHEERS!</p>
+            </div>
+            
+            <div class="mickey-container">
+                <div class="mickey-ear mickey-ear-left"></div>
+                <div class="mickey-ear mickey-ear-right"></div>
+                <div class="mickey-head">
+                    <div class="mickey-number">2</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Create confetti dots
+        const confettiContainer = document.getElementById('confetti-container');
+        const colors = ['#FF0000', '#FFD900', '#000000'];
+        const sizes = [5, 8, 10, 12, 15];
+        
+        // Create a denser pattern of dots around the border and scattered in corners
+        const createConfettiPattern = () => {
+            // Top edge - reduced count and spread
+            createDots(20, 20, 80, 0, 5);
+            // Bottom edge - reduced count and spread
+            createDots(20, 20, 80, 95, 100);
+            // Left edge
+            createDots(40, 0, 5, 0, 100);
+            // Right edge
+            createDots(40, 95, 100, 0, 100);
+            
+            // Add clusters in corners and randomly along edges
+            createCluster(8, 0, 15, 0, 15);     // Top-left
+            createCluster(8, 85, 100, 0, 15);   // Top-right
+            createCluster(8, 0, 15, 85, 100);   // Bottom-left
+            createCluster(8, 85, 100, 85, 100); // Bottom-right
+            
+            // Add some random dots throughout for the confetti effect
+            for (let i = 0; i < 20; i++) {
+                createRandomDot(15, 85, 15, 85);
+            }
+        };
+        
+        // Create dots in a line
+        function createDots(count, xMin, xMax, yMin, yMax) {
+            for (let i = 0; i < count; i++) {
+                const x = xMin + (i / count) * (xMax - xMin);
+                const y = yMin + (i / count) * (yMax - yMin);
+                
+                // Add some randomness
+                const xOffset = (Math.random() - 0.5) * 5;
+                const yOffset = (Math.random() - 0.5) * 5;
+                
+                createDot(x + xOffset, y + yOffset);
+            }
+        }
+        
+        // Create a cluster of dots
+        function createCluster(count, xMin, xMax, yMin, yMax) {
+            for (let i = 0; i < count; i++) {
+                createRandomDot(xMin, xMax, yMin, yMax);
+            }
+        }
+        
+        // Create a random dot within bounds
+        function createRandomDot(xMin, xMax, yMin, yMax) {
+            const x = xMin + Math.random() * (xMax - xMin);
+            const y = yMin + Math.random() * (yMax - yMin);
+            createDot(x, y);
+        }
+        
+        // Create a single dot
+        function createDot(x, y) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            
+            const size = sizes[Math.floor(Math.random() * sizes.length)];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            confetti.style.width = `${size}px`;
+            confetti.style.height = `${size}px`;
+            confetti.style.backgroundColor = color;
+            confetti.style.left = `${x}%`;
+            confetti.style.top = `${y}%`;
+            
+            confettiContainer.appendChild(confetti);
+        }
+        
+        // Wait for elements to render before calculating positions
+        window.onload = function() {
+            createConfettiPattern();
+        };
+    </script>
+</body>
+</html>
