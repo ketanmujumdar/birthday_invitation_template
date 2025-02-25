@@ -2,6 +2,10 @@
 
 A delightful, interactive HTML/CSS birthday invitation template featuring Mickey Mouse theme with confetti animation.
 
+## 🎈 Live Demo
+
+Check out the live demo here: [Birthday Invitation Template](https://ketanmujumdar.github.io/birthday_invitation_template/)
+
 ## Features ✨
 
 - Responsive design that works on all devices
